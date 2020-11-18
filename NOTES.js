@@ -1,6 +1,6 @@
-//start mySQL shell: mysql -u root -p
-//will have to enter password (see notes)
-//if get coand not found try: export PATH="${PATH}:/usr/local/mysql/bin/" to .bash_profile or .zshrc (will have to restart terminal after for this line to take effect)
+        //start mySQL shell: mysql -u root -p
+        //will have to enter password (see notes)
+        //if get coand not found try: export PATH="${PATH}:/usr/local/mysql/bin/" to .bash_profile or .zshrc (will have to restart terminal after for this line to take effect)
 
 //create detabase sqlite3 db/election.db (election.db = name or database)
 //All of SQLite's internal commands begin with a period, to distinguish them from SQL queries.
@@ -17,6 +17,12 @@
 // .quit - QUIT sqlite3 and return to normal server mode
 //for boleens 1=true 0=false
 // to createa file AND populate it : echo "node_modules/" > .gitignore
+
+// to recreate and populate DB: *** Asuming schema and seeds are built!!!
+        //delete old db
+        //sqlite3 db/election.db < db/schema.sql
+        //sqlite3 db/election.db < db/seeds.sql
+        //SELECT * FROM candidates; (to check if running while in sqlete3)
 
 //write values as such
         // INSERT INTO candidates (first_name, last_name, industry_connected)
