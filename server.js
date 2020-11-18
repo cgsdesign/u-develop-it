@@ -15,6 +15,10 @@ const db = new sqlite3.Database('./db/election.db', err =>{
     }
     console.log('Connected to election database')
 })
+
+
+//FOR ADD CANDIDATE
+const inputCheck = require('./utils/inputCheck');
 //TEST TO MAKE SURE EVERYTHING IS HOOKED UP
 // .get test to make sure all hookups work .get= rout method, res.json() = response method
         // app.get('/', (req, res) => {
@@ -82,6 +86,31 @@ app.delete('/api/candidate/:id', (req, res) => {
   });
 
 //CREATE NEW CANDIDATE ENTRY
+app.post('/api/candidate', ({ body }, res) => {
+    const errors= inputCheck(body, 'first_name', 'last_name', 'industry_connected');
+        if (errors) {
+            res.status(400).json({ error: errors});
+            return
+        }
+        
+        const sql = `INSERT INTO candidates (first_name, last_name, industry_connected) 
+            VALUES (?,?,?)`;
+        const params = [body.first_name, body.last_name, body.industry_connected];
+        // ES5 function, not arrow function, to use `this`
+        db.run(sql, params, function(err, result) {
+            if (err) {
+                res.status(400).json({ error: err.message });
+                return;
+            }
+        res.json({
+                message: 'success',
+                data: body,
+                id: this.lastID
+            });
+        });
+
+})
+//JUST IN TERMINAL ADD CODE   
     // const sql = `INSERT INTO candidates (id, first_name, last_name,industry_connected)
     // VALUES (?,?,?,?)`;
     // const params = [3, 'Ronald',  'Firbank', 1];
