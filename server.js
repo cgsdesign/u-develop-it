@@ -24,30 +24,62 @@ const db = new sqlite3.Database('./db/election.db', err =>{
         //   });
 
 //READ ALL OF DATABASE COMAND
-// //err = error response, rows = db query response        
-    db.all(`SELECT * FROM candidates`, (err,rows) => {
-        console.log(rows);
-    })
+// //err = error response, rows = db query response, api is in/for url, res.json({})exports out the db info in js        
+    app.get('/api/candidates', (req,res) => {
+        const sql = `SELECT * FROM candidates`;
+        const params = [];
+
+        db.all(sql, params, (err,rows) => {
+            if (err) {
+                res.status(500).json({ error: err.message });
+            }
+            res.json({
+                message: 'success',
+                data: rows
+            });
+        });
+    });
 
 
  //READ ONLY SELECT ROWS (BY ID)
-//  db.get(`SELECT * FROM candidates WHERE id = 5`, (err, row) => {
-//      if (err) {
-//          console.log(err);
-//      }
-//      console.log(row);
-//  });
+// Get single candidate
+app.get('/api/candidate/:id', (req, res) => {
+    const sql = `SELECT * FROM candidates 
+                 WHERE id = ?`;
+    const params = [req.params.id];
+    db.get(sql, params, (err, row) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        return;
+      }
+  
+      res.json({
+        message: 'success',
+        data: row
+      });
+    });
+  });
 
 //DELETE  ONLY SELECTED ROWS (by ID)
     //.run = run SQL query but dot retrueve data results
-    // ? denotesa place holder
+    // ? denotes a place holder
     //param argument alows for prepares placement placeholders, in this case 1
-    // db.run(`DELETE FROM candidates WHERE id = ?`, 1, function(err, result) {
-    //     if (err) {
-    //       console.log(err);
-    //     }
-    //     console.log(result, this, this.changes);
-    //   });
+// Delete a candidate
+app.delete('/api/candidate/:id', (req, res) => {
+    const sql = `DELETE FROM candidates WHERE id = ?`;
+    const params = [req.params.id];
+    db.run(sql, params, function(err, result) {
+      if (err) {
+        res.status(400).json({ error: res.message });
+        return;
+      }
+  
+      res.json({
+        message: 'successfully deleted',
+        changes: this.changes
+      });
+    });
+  });
 
 //CREATE NEW CANDIDATE ENTRY
     // const sql = `INSERT INTO candidates (id, first_name, last_name,industry_connected)
