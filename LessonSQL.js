@@ -35,12 +35,12 @@
 
 
 //TO CORRECT OR CHANGE DATA
-        // UPDATE database name
+        // UPDATE table name
         //SET catagory name = new value
         //WHERE id = ;
 
 //TO DELETE DATA - WHOLE ROW
-        // DELETE FROM database name
+        // DELETE FROM table name
         // WHERE value of one of the componant to be deleted - idealy id
 
 //qlite3 db/election.db < db/schema.sql (typed in terminal after db created) the <  in an input redirect
