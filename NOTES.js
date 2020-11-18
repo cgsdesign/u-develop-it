@@ -14,6 +14,7 @@
 //SELECT * FROM candidates; the * means all, SELECT eans action to take place, FROM is where we recieve the data from
 //.headers on - to turn on catigories
 //.mode column - to align columns
+// .quit - QUIT sqlite3 and return to normal server mode
 //for boleens 1=true 0=false
 // to createa file AND populate it : echo "node_modules/" > .gitignore
 

@@ -8,7 +8,7 @@
     "migrate": "sqlite3 db/election.db < db/schema.sql",
     "seed": "sqlite3 db/election.db < db/seeds.sql",
     "db": "sqlite3 db/election.db",
-    "start": "node db/election.db"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
   "homepage": "https://github.com/cgsdesign/u-develop-it#readme",
   "devDependencies": {
     "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
   }
 }
