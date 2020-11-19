@@ -22,6 +22,7 @@
         //delete old db
         //sqlite3 db/election.db < db/schema.sql
         //sqlite3 db/election.db < db/seeds.sql
+        //RUN SQLITE = sqlite3 db/election.db
         //SELECT * FROM candidates; (to check if running while in sqlete3)
 
 //write values as such
@@ -52,3 +53,22 @@
         // WHERE value of one of the componant to be deleted - idealy id
 
 //qlite3 db/election.db < db/schema.sql (typed in terminal after db created) the <  in an input redirect
+
+// FOR ENTIRE TABLE & DB CHANGES
+        //ALTER TABLE candidates ADD COLUMN party_id INTEGER UNSIGNED; = add colomn ex.
+                //UNSIGNED= not a negative num.
+
+        //PRAGMA foreign_keys = ON pr FORIGN KEYS wont work
+
+        //DELETE FROM parties WHERE id = 1; would delete all that aply
+
+//JOIN + SELECT merges 2 or more tables ex:
+        // SELECT * FROM candidates
+        // LEFT JOIN parties ON candidates.party_id = parties.id;
+
+        or
+        // SELECT candidates.*, parties.name AS party_name
+        // FROM candidates
+        // LEFT JOIN parties ON candidates.party_id = parties.id;
+                //here AS changes the name in the catagory to be what we want (an alias) 
+                //, quaility  = the one that will show
